@@ -1,4 +1,4 @@
-# Copyright (c) 2024 Microsoft
+# Copyright (c) 2024-2025 Microsoft
 # Licensed under The MIT License [see LICENSE for details]
 
 import os
@@ -23,6 +23,10 @@ MODEL2PATH = {
     "Qwen/Qwen2-7B-Instruct": os.path.join(
         BASE_DIR, "Qwen2_7B_Instruct_128k_instruct_kv_out_v32_fit_o_best_pattern.json"
     ),
+    "Qwen/Qwen2.5-7B-Instruct": os.path.join(
+        BASE_DIR,
+        "Qwen2.5_7B_Instruct_128k_instruct_kv_out_v32_fit_o_best_pattern.json",
+    ),
     "Qwen/Qwen2.5-32B-Instruct": os.path.join(
         BASE_DIR,
         "Qwen2.5_32B_Instruct_128k_kv_out_v32_fit_o_best_pattern.json",
@@ -30,6 +34,12 @@ MODEL2PATH = {
     "Qwen/Qwen2.5-72B-Instruct": os.path.join(
         BASE_DIR,
         "Qwen2.5_72B_Instruct_128k_kv_out_v32_fit_o_best_pattern.json",
+    ),
+    "Qwen/Qwen2.5-7B-Instruct-1M": os.path.join(
+        BASE_DIR, "Qwen2.5_7B_Instruct_1M.json"
+    ),
+    "Qwen/Qwen2.5-14B-Instruct-1M": os.path.join(
+        BASE_DIR, "Qwen2.5_14B_Instruct_1M.json"
     ),
     "THUDM/glm-4-9b-chat-1m": os.path.join(
         BASE_DIR, "GLM_4_9B_1M_instruct_kv_out_v32_fit_o_best_pattern.json"
@@ -57,3 +67,12 @@ MODEL2PATH = {
 
 def get_support_models():
     return list(MODEL2PATH.keys())
+
+
+def check_path():
+    for name, path in MODEL2PATH.items():
+        assert os.path.exists(path), f"{name} Config does not exist! Please check it."
+
+
+if __name__ == "__main__":
+    check_path()
