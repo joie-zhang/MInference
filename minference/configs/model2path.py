@@ -5,6 +5,9 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL2PATH = {
+    "/scratch/gpfs/DANQIC/models/Llama-3.1-8B-Instruct": os.path.join(
+        BASE_DIR, "Llama_3.1_8B_Instruct_128k_kv_out_v32_fit_o_best_pattern_v2.json"
+    ),
     "gradientai/Llama-3-8B-Instruct-262k": os.path.join(
         BASE_DIR, "Llama_3_8B_Instruct_262k_kv_out_v32_fit_o_best_pattern.json"
     ),
