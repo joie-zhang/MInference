@@ -8,6 +8,13 @@ MODEL2PATH = {
     "/scratch/gpfs/DANQIC/models/Llama-3.1-8B-Instruct": os.path.join(
         BASE_DIR, "Llama_3.1_8B_Instruct_128k_kv_out_v32_fit_o_best_pattern_v2.json"
     ),
+    "/scratch/gpfs/DANQIC/models/Qwen2.5-7B-Instruct": os.path.join(
+        BASE_DIR,
+        "Qwen2.5_7B_Instruct_128k_instruct_kv_out_v32_fit_o_best_pattern.json"
+    ),
+    "/scratch/gpfs/DANQIC/models/Qwen2.5-7B-Instruct-1M": os.path.join(
+        BASE_DIR, "Qwen2.5_7B_Instruct_1M.json"
+    ),
     "gradientai/Llama-3-8B-Instruct-262k": os.path.join(
         BASE_DIR, "Llama_3_8B_Instruct_262k_kv_out_v32_fit_o_best_pattern.json"
     ),
