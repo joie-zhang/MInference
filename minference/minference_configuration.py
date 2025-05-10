@@ -20,6 +20,7 @@ class MInferenceConfig:
         "static",  # minference w/ static
         "dilated1",
         "dilated2",
+        "streaming2",
         "a_shape",
         "tri_shape",
         "vllm_a_shape",
@@ -36,6 +37,7 @@ class MInferenceConfig:
         "quest",
         "retr_attn",
         "kivi",
+        "streamingllm_original",
     ]
 
     def __init__(

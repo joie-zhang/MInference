@@ -70,6 +70,10 @@ class MInference:
             self.config.attn_kwargs.setdefault("n_local", 3968)
             self.config.attn_kwargs.setdefault("n_init", 128)
 
+        if self.config.kv_type == "streamingllm_original":
+            self.config.attn_kwargs.setdefault("n_local", 4092)
+            self.config.attn_kwargs.setdefault("n_init", 4)
+
         if self.config.attn_type == "flexprefill":
             self.config.attn_kwargs.setdefault("gamma", 0.9)
             self.config.attn_kwargs.setdefault("tau", 0.1)
@@ -115,8 +119,8 @@ class MInference:
         elif self.config.attn_type == "streaming2":
             model = patch_hf(
                 model,
-                attn_type="a_shape",
-                attn_kwargs={"n_local": 3968, "n_init": 128, **self.config.attn_kwargs},
+                attn_type="streaming2",
+                attn_kwargs={"n_local": 4092, "n_init": 4, **self.config.attn_kwargs},
             )
         elif self.config.attn_type in ["hf", "vllm"]:
             pass
