@@ -91,8 +91,8 @@ class MInference:
             model = new_patch(model, self.config)
 
         elif self.config.attn_type == "a_shape":
-            self.config.attn_kwargs.setdefault("n_local", 3968)
-            self.config.attn_kwargs.setdefault("n_init", 128)
+            self.config.attn_kwargs.setdefault("n_local", 4092)
+            self.config.attn_kwargs.setdefault("n_init", 4)
             model = new_patch(model, self.config)
 
         elif self.config.attn_type == "tri_shape":
@@ -119,7 +119,7 @@ class MInference:
         elif self.config.attn_type == "streaming2":
             model = patch_hf(
                 model,
-                attn_type="streaming2",
+                attn_type="a_shape",
                 attn_kwargs={"n_local": 4092, "n_init": 4, **self.config.attn_kwargs},
             )
         elif self.config.attn_type in ["hf", "vllm"]:
