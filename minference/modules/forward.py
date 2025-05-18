@@ -195,6 +195,7 @@ decoding_forwards = {
     "pyramidkv": None,
     "quest": quest_decode_kernel,
     "streamingllm": None,
+    "streamingllm_original": None,
     "retr_attn": retr_attn,
     "kivi": kivi_forward,
 }

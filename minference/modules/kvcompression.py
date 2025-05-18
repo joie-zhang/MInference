@@ -349,8 +349,8 @@ class PyramidKVCache(SnapKVCache):
 
 class StreamingLLMKVCache(SnapKVCache):
     def __init__(self, config):
-        n_local = config.attn_kwargs.get("n_local", 3968)
-        n_init = config.attn_kwargs.get("n_init", 128)
+        n_local = config.attn_kwargs.get("n_local", 4092)
+        n_init = config.attn_kwargs.get("n_init", 4)
         config.attn_kwargs["window_size"] = n_local
         config.attn_kwargs["max_capacity_prompt"] = n_local + n_init
         super().__init__(config)
@@ -455,6 +455,7 @@ method_to_cache_obj = {
     "snapkv": SnapKVCache,
     "pyramidkv": PyramidKVCache,
     "streamingllm": StreamingLLMKVCache,
+    "streamingllm_original": StreamingLLMKVCache,
     "quest": DynamicCacheWithRepeat,
     "retr_attn": RetrAttnCache,
     "kivi": KiviCache,
