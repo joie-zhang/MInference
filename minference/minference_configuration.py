@@ -40,6 +40,39 @@ class MInferenceConfig:
         "streamingllm_original",
     ]
 
+    # Add method-specific defaults
+    METHOD_DEFAULTS = {
+        "snapkv": {
+            "window_size": 32,
+            "max_capacity_prompt": 4096,
+            "kernel_size": 5,
+            "pooling": "avgpool"
+        },
+        "pyramidkv": {
+            "window_size": 32,
+            "max_capacity_prompt": 4096,
+            "kernel_size": 5,
+            "pooling": "avgpool"
+        },
+        "streamingllm": {
+            "n_local": 3968,
+            "n_init": 128
+        },
+        "streamingllm_original": {
+            "n_local": 4092,
+            "n_init": 4
+        },
+        "quest": {
+            "chunk_size": 16,
+            "token_budget": 1024
+        },
+        "kivi": {
+            "bits": 2,
+            "group_size": 32,
+            "residual_length": 32
+        }
+    }
+
     def __init__(
         self,
         attn_type: str = "minference",
@@ -55,15 +88,27 @@ class MInferenceConfig:
     ):
         super(MInferenceConfig, self).__init__()
         attn_type, kv_type = self.update_config_type(attn_type, kv_type)
+        
+        # Validate attn_type and kv_type are supported
         assert (
             attn_type in self.MINFERENCE_ATTENTION_TYPES + self.OTHER_ATTENTION_TYPES
         ), f"The attn_type {attn_type} you specified is not supported."
         assert (
             kv_type in self.KV_TYPES
         ), f"The kv_type {kv_type} you specified is not supported."
+        
+        # Apply method-specific defaults if they exist
+        if kv_type in self.METHOD_DEFAULTS:
+            for key, default_value in self.METHOD_DEFAULTS[kv_type].items():
+                attn_kwargs.setdefault(key, default_value)
+
         print(
             f"<---- MInference Config Detail ----> attn_type {attn_type}, kv_type {kv_type}"
         )
+        if attn_kwargs:
+            print(f"<---- MInference Attn Kwargs ----> {attn_kwargs}")
+        
+        # Assign all attributes
         self.attn_type = attn_type
         self.config_path = self.update_config_path(config_path, model_name)
         self.model_name = model_name

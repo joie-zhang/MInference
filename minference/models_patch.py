@@ -51,29 +51,6 @@ class MInference:
             self.config.attn_kwargs.setdefault("top_k", 4096)
             self.config.attn_kwargs.setdefault("from_layer", 0)
 
-        if self.config.kv_type == "kivi":
-            self.config.attn_kwargs.setdefault("bits", 2)
-            self.config.attn_kwargs.setdefault("group_size", 32)
-            self.config.attn_kwargs.setdefault("residual_length", 32)
-
-        if self.config.kv_type in ["snapkv", "pyramidkv"]:
-            self.config.attn_kwargs.setdefault("window_size", 32)
-            self.config.attn_kwargs.setdefault("max_capacity_prompt", 4096)
-            self.config.attn_kwargs.setdefault("kernel_size", 5)
-            self.config.attn_kwargs.setdefault("pooling", "avgpool")
-
-        if self.config.kv_type == "quest":
-            self.config.attn_kwargs.setdefault("chunk_size", 16)
-            self.config.attn_kwargs.setdefault("token_budget", 1024)
-
-        if self.config.kv_type == "streamingllm":
-            self.config.attn_kwargs.setdefault("n_local", 3968)
-            self.config.attn_kwargs.setdefault("n_init", 128)
-
-        if self.config.kv_type == "streamingllm_original":
-            self.config.attn_kwargs.setdefault("n_local", 4092)
-            self.config.attn_kwargs.setdefault("n_init", 4)
-
         if self.config.attn_type == "flexprefill":
             self.config.attn_kwargs.setdefault("gamma", 0.9)
             self.config.attn_kwargs.setdefault("tau", 0.1)
